@@ -1,4 +1,4 @@
-module github.com/tty5/sdtmlog
+module github.com/tty5/tmlog
 
 go 1.14
 
