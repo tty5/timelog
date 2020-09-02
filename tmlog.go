@@ -11,7 +11,7 @@ const modName = "[tmlog]"
 
 func init() {
 	xlog := logrus.New()
-	xlog.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli}
+	xlog.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli, FullTimestamp: true}
 	log = xlog.WithField("mod", modName)
 }
 
