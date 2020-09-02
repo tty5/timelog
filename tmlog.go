@@ -1,4 +1,4 @@
-package sdtmlog
+package tmlog
 
 import (
 	"github.com/sirupsen/logrus"
