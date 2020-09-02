@@ -7,12 +7,12 @@ import (
 
 var log *logrus.Entry
 
-const pkgname = "[sdtm]"
+const modName = "[tmlog]"
 
 func init() {
 	xlog := logrus.New()
 	xlog.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli}
-	log = xlog.WithField("pkg", pkgname)
+	log = xlog.WithField("mod", modName)
 }
 
 func GetLogger() *logrus.Entry {
