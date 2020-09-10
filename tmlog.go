@@ -20,7 +20,7 @@ func init() {
 	gloge = glog.WithField("mod", modName)
 }
 
-func GetLg() *logrus.Entry {
+func GetLge() *logrus.Entry {
 	return gloge
 }
 
