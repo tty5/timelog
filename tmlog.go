@@ -28,12 +28,11 @@ var lgMap = make(map[string]*logrus.Logger)
 var lgMapLock sync.RWMutex
 
 func GetLgWithPath(path string) *logrus.Logger {
-	lgMapLock.RLock()
+	lgMapLock.Lock()
+	lgMapLock.Unlock()
 	if g, ok := lgMap[path]; ok {
-		lgMapLock.RUnlock()
 		return g
 	}
-	lgMapLock.RUnlock()
 
 	l := logrus.New()
 	l.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli, FullTimestamp: true}
@@ -44,9 +43,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 	}
 	l.SetOutput(f)
 
-	lgMapLock.Lock()
 	lgMap[path] = l
-	lgMapLock.Unlock()
 
 	return l
 }
