@@ -8,20 +8,15 @@ import (
 	"time"
 )
 
-var gloge *logrus.Entry
-
-const modName = "[tmlog]"
-
 var glog *logrus.Logger
 
 func init() {
 	glog = logrus.New()
 	glog.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli, FullTimestamp: true}
-	gloge = glog.WithField("mod", modName)
 }
 
-func GetLge() *logrus.Entry {
-	return gloge
+func GetLg() *logrus.Logger {
+	return glog
 }
 
 var lgMap = make(map[string]*logrus.Logger)
