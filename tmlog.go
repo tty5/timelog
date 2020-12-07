@@ -34,7 +34,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
-		panic(fmt.Sprintln("tmlog error opening file: %v", err))
+		panic(fmt.Sprintf("tmlog error opening file: %v", err))
 	}
 	l.SetOutput(f)
 
