@@ -36,12 +36,12 @@ func GetLgWithPath(path string) *logrus.Logger {
 
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
-		glog.Errorln("tmlog error opening file:", path, err)
-		return glog
+		glog.Errorln("tmlog use glog due to error opening file:", path, err)
+		l = glog
+	} else {
+		l.SetOutput(f)
 	}
-	l.SetOutput(f)
 
 	lgMap[path] = l
-
 	return l
 }
