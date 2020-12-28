@@ -11,7 +11,7 @@ var glog *logrus.Logger
 
 func init() {
 	glog = logrus.New()
-	glog.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli, FullTimestamp: true}
+	glog.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMilli}
 }
 
 func GetLg() *logrus.Logger {
@@ -32,7 +32,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 	lgMapLock.Lock()
 	defer lgMapLock.Unlock()
 	l := logrus.New()
-	l.Formatter = &logrus.TextFormatter{TimestampFormat: time.StampMilli, FullTimestamp: true}
+	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMilli}
 
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
