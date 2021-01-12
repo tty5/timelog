@@ -36,8 +36,8 @@ func GetLgWithPath(path string) *logrus.Logger {
 
 	hook := lumberjack.Logger{
 		Filename:   path,
-		MaxSize:    10,
-		MaxBackups: 10,
+		MaxSize:    50,
+		MaxBackups: 5,
 	}
 	l.SetOutput(&hook)
 
