@@ -2,7 +2,7 @@ package tmlog
 
 import (
 	"github.com/sirupsen/logrus"
-	"os"
+	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 	"sync"
 	"time"
 )
@@ -34,13 +34,12 @@ func GetLgWithPath(path string) *logrus.Logger {
 	l := logrus.New()
 	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMilli}
 
-	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
-	if err != nil {
-		glog.Errorln("tmlog use glog due to error opening file:", path, err)
-		l = glog
-	} else {
-		l.SetOutput(f)
+	hook := lumberjack.Logger{
+		Filename:   path,
+		MaxSize:    10,
+		MaxBackups: 10,
 	}
+	l.SetOutput(&hook)
 
 	lgMap[path] = l
 	return l
