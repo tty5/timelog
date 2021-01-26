@@ -38,6 +38,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 		Filename:   path,
 		MaxSize:    50,
 		MaxBackups: 5,
+		LocalTime: true,
 	}
 	l.SetOutput(&hook)
 
