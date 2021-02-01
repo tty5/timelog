@@ -11,7 +11,7 @@ var glog *logrus.Logger
 
 func init() {
 	glog = logrus.New()
-	glog.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMilli}
+	glog.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMicro}
 }
 
 func GetLg() *logrus.Logger {
@@ -32,7 +32,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 	lgMapLock.Lock()
 	defer lgMapLock.Unlock()
 	l := logrus.New()
-	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMilli}
+	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMicro}
 
 	hook := lumberjack.Logger{
 		Filename:   path,
