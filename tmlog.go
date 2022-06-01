@@ -18,10 +18,25 @@ func GetLg() *logrus.Logger {
 	return glog
 }
 
+func GetLgWithPath(path string) *logrus.Logger {
+	l := logrus.New()
+	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMicro}
+
+	hook := lumberjack.Logger{
+		Filename:   path,
+		MaxSize:    50,
+		MaxBackups: 5,
+		LocalTime:  true,
+	}
+	l.SetOutput(&hook)
+
+	return l
+}
+
 var lgMap = make(map[string]*logrus.Logger)
 var lgMapLock sync.RWMutex
 
-func GetLgWithPath(path string) *logrus.Logger {
+func GetLgWithPathUni(path string) *logrus.Logger {
 	lgMapLock.RLock()
 	if g, ok := lgMap[path]; ok {
 		lgMapLock.RUnlock()
@@ -38,7 +53,7 @@ func GetLgWithPath(path string) *logrus.Logger {
 		Filename:   path,
 		MaxSize:    50,
 		MaxBackups: 5,
-		LocalTime: true,
+		LocalTime:  true,
 	}
 	l.SetOutput(&hook)
 
