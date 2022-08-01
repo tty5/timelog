@@ -18,6 +18,21 @@ func GetLg() *logrus.Logger {
 	return glog
 }
 
+func GetLgWithPathLogSize(path string, maxSize int, maxBackups int) *logrus.Logger {
+	l := logrus.New()
+	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMicro}
+
+	hook := lumberjack.Logger{
+		Filename:   path,
+		MaxSize:    maxSize,
+		MaxBackups: maxBackups,
+		LocalTime:  true,
+	}
+	l.SetOutput(&hook)
+
+	return l
+}
+
 func GetLgWithPath(path string) *logrus.Logger {
 	l := logrus.New()
 	l.Formatter = &logrus.JSONFormatter{TimestampFormat: time.StampMicro}
